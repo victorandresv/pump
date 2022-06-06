@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace pump.Models
+﻿namespace pump.Models
 {
     public class ErrorViewModel
     {
