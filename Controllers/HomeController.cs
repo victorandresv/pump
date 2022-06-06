@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using pump.Models;
@@ -14,8 +15,11 @@ namespace pump.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        async public Task<IActionResult> Index()
         {
+            string company_id = "75e87d7c-fa35-4de6-ad70-149d67bec9f5";
+            var productContext = new ProductContext();
+            ViewBag.Products = await productContext.GetByCompanyId(company_id);
             return View();
         }
 

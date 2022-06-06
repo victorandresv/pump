@@ -7,6 +7,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
 </Project>

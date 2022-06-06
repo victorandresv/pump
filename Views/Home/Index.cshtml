@@ -2,4 +2,33 @@
     ViewData["Title"] = "Gestão de produtos";
 }
 
+<div class="container">
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Unidade</th>
+                <th>Preço</th>
+                <th>Image</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.products)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Unit</td>
+                    <td>@item.Price</td>
+                    <td><img class="img-thumbnail" style="height:80px" src="@item.Img"/></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary">Editar</button>
+                        <button class="btn btn-sm btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
