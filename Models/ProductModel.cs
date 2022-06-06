@@ -9,5 +9,6 @@ namespace pump.Models
         public double Price { get; set; }
         public string Img { get; set; }
         public string Company_Id { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

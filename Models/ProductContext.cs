@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Npgsql;
 
@@ -15,7 +16,7 @@ namespace pump.Models
 
             await using var cn = new NpgsqlConnection(cs);
             await cn.OpenAsync();
-            await using (var cmd = new NpgsqlCommand("SELECT id, name, price, unit, img FROM public.products WHERE company_id = '" + id + "'", cn))
+            await using (var cmd = new NpgsqlCommand("SELECT id, name, price, unit, img FROM public.products WHERE company_id = '" + id + "' ORDER BY ts DESC", cn))
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
                 while (await reader.ReadAsync())
@@ -32,6 +33,22 @@ namespace pump.Models
             }
 
             return productsModel;
+        }
+
+        public async void SetProduct(ProductModel product)
+        {
+            await using var cn = new NpgsqlConnection(cs);
+            await cn.OpenAsync();
+
+            await using (var cmd = new NpgsqlCommand("INSERT INTO public.products (name, price, unit, img, company_id, ts) VALUES (@name, @price, @unit, @img, @company_id, now())", cn))
+            {
+                cmd.Parameters.AddWithValue("name", product.Name);
+                cmd.Parameters.AddWithValue("price", decimal.Parse(product.Price.ToString()));
+                cmd.Parameters.AddWithValue("unit", product.Unit);
+                cmd.Parameters.AddWithValue("img", product.Img);
+                cmd.Parameters.AddWithValue("company_id", new Guid(product.Company_Id));
+                await cmd.ExecuteNonQueryAsync();
+            }
         }
     }
 }

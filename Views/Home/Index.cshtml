@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col">
-            <button class="btn btn-primary">Novo produto</button>
+            <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Form">Novo produto</a>
         </div>
     </div>
 
@@ -38,7 +38,7 @@
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.Unit</td>
-                    <td>@item.Price</td>
+                    <td>BRL @item.Price</td>
                     <td><img class="img-thumbnail" style="height:80px" src="@item.Img" /></td>
                     <td>
                         <button class="btn btn-sm btn-primary">Editar</button>
